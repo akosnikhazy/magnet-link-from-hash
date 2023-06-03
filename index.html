@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="A small application that creates a magnet link from a hash value.">
+
+    <title>Generate Magnet Link From Hash 🧲</title>
+    <link rel="icon" href="magnet.png" />
+	<style>
+		html{
+			background:#333;
+			font-family:Courier New
+		}
+		div{
+			border: 1px solid #ccc;
+			-webkit-border-radius: 3px 3px 3px 3px;
+			border-radius: 3px 3px 3px 3px;
+		}
+		#container{
+			width:300px;
+			height:200px;
+			margin: 10px auto;
+			text-align:center;
+			
+			color: #444;
+			background:#efefef;
+			padding: 20px;
+		}
+		
+		label{
+			display:block;
+			margin-bottom: 30px;
+		}
+		#copy{
+			cursor:pointer;
+			border:1px solid transparent;
+			margin-left: 5px;
+		}
+		footer{
+			font-size:10px;
+			color:#999;
+			text-align:center;
+		}
+	</style>
+  </head>
+  <body>
+  <div id="container">
+	<p>Simply enter your hash value and click on the magnet link to start your business.</p>
+    <label>hash: <input type="text" id="hash" placeholder="your hash"></label>
+	
+	<a href="" id="link" title="This will try to open your software, which is able to use magnet links.">Your 🧲 link with hash</a><br><br>
+	<div id="rawhash"><input type="text" id="raw" value=""><span id="copy" title="copy to clipboard">📋</span></div>
+  </div>
+<footer>
+you like this? I like ETH: 0x8A220F8e28Ce3D8CdA3eBA09Ebd6dF0fBb9fE7fa<br>
+
+need an example hash? try this one: ulfihylx35oldftn7qosmk6hkhsjq5af
+</footer>
+	<script>
+		
+		var base = "magnet:?xt=urn:btih:";
+		
+		var hash = document.getElementById("hash"),
+		    link = document.getElementById("link"),
+		    raw =  document.getElementById("raw"),
+		    rawhash =  document.getElementById("rawhash");
+		    copy =  document.getElementById("copy");
+		
+		link.style.display = rawhash.style.display = "none";
+		
+		hash.addEventListener('input', function(event) {
+			if("" == event.target.value) 
+			{
+				link.style.display = rawhash.style.display = "none";
+				return;
+			}
+			
+			link.href = raw.value = base + event.target.value;
+			link.style.display = rawhash.style.display = "inline";
+			copy.style.border = "1px solid transparent";
+			
+		});
+		
+		raw.addEventListener('click', function() {
+			raw.select();
+		});
+		
+		copy.addEventListener('click', function() {
+			raw.select();
+			document.execCommand('copy');
+			copy.style.border = "1px solid #00aa00";
+		});
+			
+	</script>
+  </body>
+</html>
